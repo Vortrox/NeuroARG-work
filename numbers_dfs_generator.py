@@ -1,7 +1,7 @@
-# 1. I can never say oh it’s been so long
 from typing import List
 
 
+# 1. I can never say oh it’s been so long
 def l1(num: int) -> int:
     yield num
 
