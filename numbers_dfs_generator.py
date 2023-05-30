@@ -168,7 +168,14 @@ def generate_numbers() -> List[int]:
 
 if __name__ == "__main__":
     numbers = generate_numbers()
-    # Print numbers in list format
-    print(numbers)
-    # Print each number on a new line
-    print(*numbers, sep="\n")
+    with open("output.txt", "w") as f:
+        # Output numbers in list format
+        print(numbers)
+        f.write(str(numbers))
+
+        # Output each number on a new line
+        print()
+        print(*numbers, sep="\n")
+        f.write("\n")
+        f.write("\n")
+        f.writelines((f"{n}\n" for n in numbers))
