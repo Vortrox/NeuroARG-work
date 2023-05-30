@@ -28,6 +28,7 @@ def l5(num: int) -> int:
 
 # 6. Start with number 2 yeah
 def l6(num: int) -> int:
+    # Note: This doesn't use the num parameter, so this will break the chain by ignoring all outputs from previous lyric lines
     yield 2
 
 
@@ -151,8 +152,11 @@ def l22(num: int) -> int:
 
 
 def generate_numbers() -> List[int]:
+    # These functions are Generators (see: https://docs.python.org/3/howto/functional.html#generators)
     line_functions = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18, l19, l20, l21,
                       l22]
+    # For every generator function, this iterates through all previously generated numbers and repeatedly calls the
+    # generator function until it has exhausted all its returns
     numbers = {0}
     for func in line_functions:
         new_numbers = {j for i in numbers for j in func(i)}
