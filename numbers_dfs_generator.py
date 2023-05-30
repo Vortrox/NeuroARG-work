@@ -140,9 +140,7 @@ def l21(num: int) -> int:
 
     # Remove all digits before the first "17" in the sequence. Remove the sequence if there is no "17"
     num_str = str(num)
-    if "17" not in num_str:
-        yield None
-    else:
+    if "17" in num_str:
         num_str = num_str[num_str.find("17"):]
         yield int(num_str)
 
@@ -157,7 +155,7 @@ def generate_numbers() -> List[int]:
                       l22]
     numbers = {0}
     for func in line_functions:
-        new_numbers = {j for i in numbers for j in func(i) if j is not None}
+        new_numbers = {j for i in numbers for j in func(i)}
         numbers = new_numbers
 
     # Sort the numbers - not actually necessary, but it keeps the output organised
