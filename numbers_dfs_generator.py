@@ -1,4 +1,7 @@
 # 1. I can never say oh it’s been so long
+from typing import List
+
+
 def l1(num: int) -> int:
     yield num
 
@@ -149,7 +152,7 @@ def l22(num: int) -> int:
     yield num
 
 
-if __name__ == "__main__":
+def generate_numbers() -> List[int]:
     line_functions = [l1, l2, l3, l4, l5, l6, l7, l8, l9, l10, l11, l12, l13, l14, l15, l16, l17, l18, l19, l20, l21,
                       l22]
     numbers = {0}
@@ -158,8 +161,11 @@ if __name__ == "__main__":
         numbers = new_numbers
 
     # Sort the numbers - not actually necessary, but it keeps the output organised
-    numbers = sorted(list(numbers))
+    return sorted(list(numbers))
 
+
+if __name__ == "__main__":
+    numbers = generate_numbers()
     # Print numbers in list format
     print(numbers)
     # Print each number on a new line
