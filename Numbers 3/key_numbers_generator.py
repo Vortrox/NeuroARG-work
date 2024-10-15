@@ -3,7 +3,10 @@ from typing import Iterable
 
 
 def generate_key_numbers(initial_numbers: list[int], length: int=12) -> Iterable[tuple[int]]:
-    numbers = initial_numbers + [0] * (length - len(initial_numbers))
+    # Increases the chance of same key numbers being generated and filtered
+    numbers = [n % 6 for n in initial_numbers]
+
+    numbers = numbers + [0] * (length - len(numbers))
     # todo: Handle case where there are more initial numbers than the length. In that case return permutations of adding
     #  each extra numbers to each other until at the length limit
 
