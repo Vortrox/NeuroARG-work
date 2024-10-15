@@ -15,12 +15,20 @@ def generate_key_numbers(initial_numbers: list[int], length: int=12, filler_numb
     #  filtering them as they're generated as it will greatly reduce memory usage
     # Potentially high memory usage, upper bound is exponential O(2^n)
     seen_key_numbers = set()
-    for filler in product(filler_numbers, repeat=length - len(initial_numbers)):
-        numbers = initial_numbers + list(filler)
+    def number_permutations(numbers: list[int]):
         for p in permutations(numbers, length):
             if p not in seen_key_numbers:
                 seen_key_numbers.add(p)
                 yield p
+
+    n_filler_numbers = length - len(initial_numbers)
+    if n_filler_numbers <= 0:
+        return number_permutations(initial_numbers)
+
+    for filler in product(filler_numbers, repeat=n_filler_numbers):
+        for perm in number_permutations(initial_numbers + list(filler)):
+            yield perm
+
 
 if __name__ == "__main__":
     for p in generate_key_numbers(list(range(2)), length=5, filler_numbers=[2, 3]):
